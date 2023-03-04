@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+
+  #make the build-image and push-image file executuable. use CHMOD
+  pre_build:
+    commands:
+      - chmod +x build-image.sh push-image.sh
+      - ./build-image.sh
+
+  build:
+    commands:
+      - ./push-image.sh
