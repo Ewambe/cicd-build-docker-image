@@ -9,6 +9,9 @@ set -eu
 # retag docker image 
 docker tag techmax 353182159803.dkr.ecr.us-east-1.amazonaws.com/techmax
 
+# login to your docker hub account
+docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+
 # login to ecr
 aws ecr get-login-password | docker login --username AWS --password-stdin 353182159803.dkr.ecr.us-east-1.amazonaws.com
 
