@@ -5,11 +5,11 @@ set -eu
 
 #codebuild will use this file to push image in docker hub
 
-# login to your docker hub account
-docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
+# retag docker image 
+docker tag techmax 353182159803.dkr.ecr.us-east-1.amazonaws.com/techmax
 
-# use the docker tag command to give the image a new name
-docker tag $IMAGE_TAG $DOCKER_HUB_USERNAME/$DOCKER_HUB_REPO_NAME
+# login to ecr
+aws ecr get-login-password | docker login --username AWS --password-stdin 353182159803.dkr.ecr.us-east-1.amazonaws.com
 
-# push the image to your docker hub repository
-docker push $DOCKER_HUB_USERNAME/$DOCKER_HUB_REPO_NAME
+# push docker image to ecr repository 
+docker push 353182159803.dkr.ecr.us-east-1.amazonaws.com/techmax
