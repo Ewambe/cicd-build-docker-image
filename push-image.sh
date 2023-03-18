@@ -7,10 +7,11 @@ set -eu
 
 
 # retag docker image 
-docker tag techmax 353182159803.dkr.ecr.us-east-1.amazonaws.com/techmax
+docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 
 # Login to docker & ecr
-docker login -u AWS -p $(aws ecr get-login-password --region us-east-1) 353182159803.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
 
 # push docker image to ecr repository 
-docker push 353182159803.dkr.ecr.us-east-1.amazonaws.com/techmax
+docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+
